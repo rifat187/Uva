@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define		pb              push_back
+#define		PB              pop_back
+#define		nn              "\n"
+#define		all(p)          p.begin(),p.end()
+#define		ss              ' '
+#define		gcd(a,b)        __gcd(a,b)
+#define		lcm(a,b)        (a*b)/gcd(a,b)
+#define		pi              acos(-1.0)
+typedef		long long       ll;
+typedef		vector<ll>      vll;
+
+int main()
+{
+    ll a,b,c,t,in=0;
+    cin>>t;
+    while(t--)
+    {
+
+        cin>>a>>b>>c;
+        if(a<=20&&b<=20&&c<=20)
+            printf("Case %lld: good\n",++in);
+        else
+            printf("Case %lld: bad\n",++in);
+
+
+    }
+
+
+    return 0;
+}
