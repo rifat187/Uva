@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define		pb              push_back
+#define		PB              pop_back
+#define		nn              "\n"
+#define		all(p)          p.begin(),p.end()
+#define		ss              " "
+#define		gcd(a,b)        __gcd(a,b)
+#define		lcm(a,b)        (a*b)/gcd(a,b)
+#define		pi              acos(-1.0)
+typedef		long long       ll;
+typedef		vector<ll>      vll;
+
+
+int main()
+{
+    ll a[100010],b[100010];
+    while(cin>>a[0]>>a[1]>>a[2]>>a[3]>>a[4]>>a[5]>>a[6]>>a[7]>>a[8])
+    {
+       b[0]=a[3]+a[6]+a[2]+a[8]+a[1]+a[4];
+       b[1]=a[3]+a[6]+a[1]+a[7]+a[2]+a[5];
+       b[2]=a[5]+a[8]+a[0]+a[6]+a[1]+a[4];
+       b[3]=a[5]+a[8]+a[1]+a[7]+a[0]+a[3];
+       b[4]=a[4]+a[7]+a[0]+a[6]+a[2]+a[5];
+       b[5]=a[4]+a[7]+a[2]+a[8]+a[0]+a[3];
+       ll mn=b[0];
+      for(int i=1;i<6;i++)
+      {
+          if(b[i]<mn) mn=b[i];
+      }
+      for(int i=0;i<6;i++)
+      {
+          if(b[i]==mn)
+          {
+              if(i==0) cout<<"BCG"<<ss;
+              if(i==1) cout<<"BGC"<<ss;
+              if(i==2) cout<<"CBG"<<ss;
+              if(i==3) cout<<"CGB"<<ss;
+              if(i==4) cout<<"GBC"<<ss;
+              if(i==5) cout<<"GCB"<<ss;
+              //if(i==6) cout<<"BCG"<<ss;
+              cout<<b[i]<<nn;
+              break;
+          }
+
+      }
+
+
+
+    }
+
+
+    return 0;
+}
+
+
+
