@@ -1,0 +1,87 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+#define		pb              push_back
+#define		PB              pop_back
+#define		nn              "\n"
+#define		all(p)          p.begin(),p.end()
+#define		zz(v)           v.size()
+#define		ss              ' '
+#define 	S(a)            scanf("%lld",&a)
+#define 	SS(a,b)         scanf("%lld %lld",&a,&b)
+#define 	SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define		gcd(a,b)        __gcd(a,b)
+#define		lcm(a,b)        (a*b)/gcd(a,b)
+#define		pi              acos(-1.0)
+typedef		long long       ll;
+typedef		vector<ll>      vll;
+
+vll v[200];
+ll visited[200];
+ll level[200];
+
+ll  bfs(ll u)
+{
+    memset(visited,0,sizeof(visited));
+    memset( level,0,sizeof( level));
+    visited[u]=1;
+    level[u]=0;
+    queue<ll>q;
+    q.push(u);
+
+    while(!q.empty())
+    {
+        u=q.front();
+        visited[u]=1;
+        q.pop();
+
+        for(ll i=0; i<zz(v[u]); i++)
+        {
+            ll p=v[u][i];
+            if(!visited[p])
+            {
+                q.push(p);
+                visited[p]=1;
+                level[p]=level[u]+1;
+
+            }
+            else{
+
+                if(level[p]==level[u]) return 0;
+            }
+        }
+    }
+
+    return 1;
+
+}
+
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    ll a,b,c,i,j,t,k,node,edge;
+  while(  cin>>node)
+  {
+      if(!node) return 0;
+      cin>>edge;
+
+    for(i=1; i<=edge; i++)
+    {
+        cin>>a>>b;
+        v[a].pb(b);
+        v[b].pb(a);
+    }
+
+   if( bfs(0)) cout<<"BICOLORABLE."<<nn;
+   else cout<<"NOT BICOLORABLE."<<nn;
+
+   for(ll i=0;i<node;i++)
+   {
+       v[i].clear();
+   }
+
+
+  }
+
+    return 0;
+}
