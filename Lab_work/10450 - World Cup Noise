@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef      long long int    ll;
+typedef      long double   ld;
+typedef     vector<ll>      vll;
+#define     fi              first
+#define     print(v)        for(ll i:v) cout<<i<<ss
+#define     se              second
+#define     pb              push_back
+#define     nn              "\n"
+#define     all(p)          p.begin(),p.end()
+#define     zz(v)           (ll)v.size()
+#define     S(a)            scanf("%lld",&a)
+#define     SS(a,b)         scanf("%lld %lld",&a,&b)
+#define     SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define     ss              ' '
+#define     pii             pair<ll,ll>
+#define     gcd(a,b)        __gcd(a,b)
+#define     lcm(a,b)        (a*b)/gcd(a,b)
+const double eps = 1e-8;
+
+int main()
+{
+
+    ll ans[100];
+    ll n;
+    ans[1]=2;
+    ans[2]=3;
+    for(ll i=3; i<=51; i++)
+        ans[i]=ans[i-1]+ans[i-2];
+    ll t;
+    cin>>t;
+    ll in=1;
+    while(t--)
+    {
+
+
+        cin>>n;
+        cout<<"Scenario #"<<in++<<":"<<nn;
+        cout<<ans[n]<<nn;
+        cout<<nn;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
