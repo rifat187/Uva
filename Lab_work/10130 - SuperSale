@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef		long long       ll;
+typedef		vector<ll>      vll;
+#define		pb              push_back
+#define		nn              "\n"
+#define		all(p)          p.begin(),p.end()
+#define		zz(v)           (ll)v.size()
+#define 	S(a)            scanf("%lld",&a)
+#define 	SS(a,b)         scanf("%lld %lld",&a,&b)
+#define 	SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define		ss              ' '
+#define     pii             pair<ll,ll>
+const double eps = 1e-8;
+
+int main()
+{
+    int T, i, j;
+    scanf("%d", &T);
+    while(T--)
+    {
+        int N, P, W, G, MW, Ans = 0;
+        int DP[31] = {};
+        scanf("%d", &N);
+        for(i = 0; i < N; i++)
+        {
+            scanf("%d %d", &P, &W);
+            for(j = 30; j >= W; j--)
+                if(DP[j] < DP[j-W]+P)
+                    DP[j] = DP[j-W]+P;
+        }
+        scanf("%d", &G);
+        while(G--)
+        {
+            scanf("%d", &MW);
+            Ans += DP[MW];
+        }
+        printf("%d\n", Ans);
+    }
+    return 0;
+}
+
