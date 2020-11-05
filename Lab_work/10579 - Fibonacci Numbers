@@ -1,0 +1,133 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef      long long int    ll;
+typedef      long double   ld;
+typedef     vector<ll>      vll;
+#define     fi              first
+#define     print(v)        for(ll i:v) cout<<i<<ss
+#define     se              second
+#define     pb              push_back
+#define     nn              "\n"
+#define     all(p)          p.begin(),p.end()
+#define     zz(v)           (ll)v.size()
+#define     S(a)            scanf("%lld",&a)
+#define     SS(a,b)         scanf("%lld %lld",&a,&b)
+#define     SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define     ss              ' '
+#define     pii             pair<ll,ll>
+#define     gcd(a,b)        __gcd(a,b)
+#define     lcm(a,b)        (a*b)/gcd(a,b)
+const double eps = 1e-8;
+
+
+
+
+string findSum(string str1, string str2)
+{
+    // Before proceeding further, make sure length
+    // of str2 is larger.
+    if (str1.length() > str2.length())
+        swap(str1, str2);
+
+    // Take an empty string for storing result
+    string str = "";
+
+    // Calculate length of both string
+    int n1 = str1.length(), n2 = str2.length();
+    int diff = n2 - n1;
+
+    // Initially take carry zero
+    int carry = 0;
+
+    // Traverse from end of both strings
+    for (int i=n1-1; i>=0; i--)
+    {
+        // Do school mathematics, compute sum of
+        // current digits and carry
+        int sum = ((str1[i]-'0') +
+                   (str2[i+diff]-'0') +
+                   carry);
+        str.push_back(sum%10 + '0');
+        carry = sum/10;
+    }
+
+    // Add remaining digits of str2[]
+    for (int i=n2-n1-1; i>=0; i--)
+    {
+        int sum = ((str2[i]-'0')+carry);
+        str.push_back(sum%10 + '0');
+        carry = sum/10;
+    }
+
+    // Add remaining carry
+    if (carry)
+        str.push_back(carry+'0');
+
+    // reverse resultant string
+    reverse(str.begin(), str.end());
+
+    return str;
+}
+
+bool ch(string s1,string s2)
+{
+    if(zz(s1)!=zz(s2))
+        return zz(s1)>zz(s2);
+
+    for(ll i=0; i<zz(s1); i++)
+    {
+        if(s2[i]>s1[i])
+            return false;
+        if(s1[i]>s2[i])
+            return true;
+    }
+
+    return true;
+
+
+}
+
+
+
+const ll N=1100;
+
+
+int main()
+{
+
+    ll a,b;
+    string s[N+10];
+
+
+    s[1]="1";
+    s[2]="1";
+
+
+
+    for(ll i=3; i<=N; i++)
+    {
+        s[i]=findSum(s[i-1],s[i-2]);
+
+    }
+    while(cin>>a)
+    {
+        if(a==0)
+        {
+            break;
+        }
+
+        ll x=a;
+        cout<<s[x]<<nn;
+
+
+    }
+
+
+
+
+
+
+
+
+
+}
