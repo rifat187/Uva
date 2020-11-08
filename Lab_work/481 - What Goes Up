@@ -1,0 +1,99 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef      long long int    ll;
+typedef      long double   ld;
+typedef     vector<ll>      vll;
+#define     fi              first
+#define     print(v)        for(ll i:v) cout<<i<<ss
+#define     se              second
+#define     pb              push_back
+#define     nn              "\n"
+#define     all(p)          p.begin(),p.end()
+#define     zz(v)           (ll)v.size()
+#define     S(a)            scanf("%lld",&a)
+#define     SS(a,b)         scanf("%lld %lld",&a,&b)
+#define     SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define     ss              ' '
+#define     pii             pair<ll,ll>
+#define     gcd(a,b)        __gcd(a,b)
+#define     lcm(a,b)        (a*b)/gcd(a,b)
+const double eps = 1e-8;
+
+#define MAX 1000005
+
+
+int n[MAX];
+int pos[MAX];
+int cnt;
+vector<int> l;
+
+int LIS()
+{
+    if (!cnt)
+        return 0;
+
+
+    l.push_back(n[0]);
+    pos[0] = 1;
+
+    for (int i = 1; i < cnt; i++)
+    {
+        if (n[i] > l.back())
+        {
+            l.push_back(n[i]);
+            pos[i] = l.size();
+        }
+        else
+        {
+            pos[i] = lower_bound(l.begin(), l.end(), n[i]) - l.begin() + 1;
+            *lower_bound(l.begin(), l.end(), n[i]) = n[i];
+        }
+    }
+
+    return l.size();
+}
+
+int main(void)
+{
+    int tmp;
+
+    cnt = 0;
+    while (EOF != scanf("%d", &tmp))
+    {
+        n[cnt++] = tmp;
+    }
+
+    int size = LIS();
+    printf("%d\n", size);
+    printf("-\n");
+
+    int ans[MAX] = {};
+    int j = 0;
+
+    for (int i = cnt-1, index = size; i >= 0; i--)
+        if (pos[i] == index)
+        {
+            ans[j++] = n[i];
+            index--;
+        }
+
+    for (int i = j-1; i >= 0; i--)
+        printf("%d\n", ans[i]);
+
+    return 0;
+}
+
+
+
+
+/*
+
+
+This problem is about finding the longest increasing subsequence (LIS), in fact a strictly increasing subsequence from an given array of ints, 
+and not only finding the length of LIS we also need to print that LIS, which is slightly more trivial. So to find LIS, there are basically 2 famous methods,
+one is using DP and another is greedy. DP has time complexity of O(n^2), so if n is too large DP can’t be used. But this DP algorithm is quite straightforward.
+On the other hand, greedy algorithm takes O(nlogk), where k is the length of LIS in the given array. This method is little bit more complex,
+
+
+
+*/
