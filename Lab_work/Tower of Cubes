@@ -1,0 +1,112 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn=1e5+7;
+typedef long long ll;
+int n;
+struct Point
+{
+    int in,out;
+} p[505][10];
+int dp[505][10];
+int x[505][10],y[505][10];
+map<int,string> mm;
+void add(int i,int j,int a,int b)
+{
+    p[i][j].in=a;
+    p[i][j].out=b;
+}
+int dfs(int i,int k)
+{
+    if(dp[i][k])
+        return dp[i][k];
+    for(int j=i+1; j<=n; j++)
+    {
+        for(int d=0; d<6; d++)
+        {
+            if(p[j][d].in==p[i][k].out)
+            {
+                int tmp=dfs(j,d);
+                if(tmp>dp[i][k])
+                {
+                    dp[i][k]=tmp;
+                    x[i][k]=j;
+                    y[i][k]=d;
+                }
+            }
+        }
+    }
+    return ++dp[i][k];
+}
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("in.txt","r",stdin);
+    freopen("out.txt","w",stdout);
+#endif
+    mm[0]="front";
+    mm[1]="back",mm[2]="left",mm[3]="right";
+    mm[4]="top",mm[5]="bottom";
+    int Case=0;
+    while(scanf("%d",&n)!=EOF&&n)
+    {
+        memset(dp,0,sizeof(dp));
+        memset(x,0,sizeof(x));
+        memset(y,0,sizeof(y));
+        memset(p,0,sizeof(p));
+        for(int i=1; i<=n; i++)
+        {
+            for(int j=0; j<3; j++)
+            {
+                int a,b;
+                scanf("%d%d",&a,&b);
+                add(i,j*2,a,b);
+                add(i,j*2+1,b,a);
+            }
+        }
+        int M=0,ix=0,iy=0;
+        for(int i=1; i<=n; i++)
+        {
+            for(int j=0; j<6; j++)
+            {
+                int tmp=dfs(i,j);
+                if(M<tmp)
+                {
+                    M=tmp;
+                    ix=i;
+                    iy=j;
+                }
+            }
+        }
+        if(Case)
+            printf("\n");
+        printf("Case #%d\n",++Case);
+        printf("%d\n",M);
+        for(int i=0; i<M; i++)
+        {
+            printf("%d",ix);
+            cout<<" "<<mm[iy]<<endl;
+            int a=ix;
+            ix=x[ix][iy];
+            iy=y[a][iy];
+        }
+    }
+    return 0;
+}
+
+
+
+/*
+
+
+
+he cube is sorted by weight from big to small, then it turns into a problem similar to the longest ascending subsequence;
+
+The definition state Dp[i][j] represents the maximum height when the J face of the first cube is the top face.
+
+Then Dp[i][j]=max (Dp[k][d]+1;1<=k<=i-1,m[i][5-j]==m[d][k])
+
+Note In order to facilitate the subsequent state of the decision, we enter the time to make the relative surface coordinates and a constant of 5.
+
+For path output, we can take a method that records the parent node.
+
+*/
