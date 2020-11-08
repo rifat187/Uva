@@ -99,14 +99,8 @@ int main()
 
 
 
-he cube is sorted by weight from big to small, then it turns into a problem similar to the longest ascending subsequence;
-
-The definition state Dp[i][j] represents the maximum height when the J face of the first cube is the top face.
-
-Then Dp[i][j]=max (Dp[k][d]+1;1<=k<=i-1,m[i][5-j]==m[d][k])
-
-Note In order to facilitate the subsequent state of the decision, we enter the time to make the relative surface coordinates and a constant of 5.
-
-For path output, we can take a method that records the parent node.
+* The basic idea of this solution is to use the n^2 solution
+ * to the lis problem, but maintain the several different faces
+ * of each cube.
 
 */
