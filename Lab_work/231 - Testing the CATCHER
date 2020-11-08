@@ -59,4 +59,38 @@ int main()
         }
         return 0;
     }
+    
+    
+    
+    
+    /*
+    
+    
+    
+    
+    
+    
+    
+    
+    This problem is based in the idea of selecting a sequence of non decreasing integer elements from an array in such a way that its length is maximised.
 
+An {\displaystyle O(n^{2})}{\displaystyle O(n^{2})} algorithm is fast enough for the problem to be accepted.
+
+A dynamic programming method can be used if executed as described below:
+
+Let {\displaystyle H_{i}}{\displaystyle H_{i}} be the height of the missile (i) The missile 0 is at height infinity. Let {\displaystyle V_{i}}{\displaystyle V_{i}} be the interception count after i missiles have been faced by the catcher. Notice that {\displaystyle V_{0}}{\displaystyle V_{0}} = 0.
+
+Then {\displaystyle Vi+1}{\displaystyle Vi+1} can be calculated as the maximum of the elements of V indexed from 0 to i whose height is smaller than or equal to the height {\displaystyle Hi+1}{\displaystyle Hi+1} added of 1 (the current interception).
+
+That way, if 5 missiles at heights 5 10 9 7 16 face the catcher, the arrays can be defined as follows:
+
+H = infinity 5 10 9 7 16
+
+V = 0 1 1 2 3 1
+
+To extract the result, get the largest element of V.
+
+
+
+
+*/
