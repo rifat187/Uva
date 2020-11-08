@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef      long long int    ll;
+typedef      long double   ld;
+typedef     vector<ll>      vll;
+#define     fi              first
+#define     print(v)        for(ll i:v) cout<<i<<ss
+#define     se              second
+#define     pb              push_back
+#define     nn              "\n"
+#define     all(p)          p.begin(),p.end()
+#define     zz(v)           (ll)v.size()
+#define     S(a)            scanf("%lld",&a)
+#define     SS(a,b)         scanf("%lld %lld",&a,&b)
+#define     SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define     ss              ' '
+#define     pii             pair<ll,ll>
+#define     gcd(a,b)        __gcd(a,b)
+#define     lcm(a,b)        (a*b)/gcd(a,b)
+const double eps = 1e-8;
+
+
+
+int n, i, j, k;
+int alpha[105][2];
+char s[105];
+void solve()
+{
+    int stack[105], sidx = -1;
+    int sum = 0, alidx = 'Z';
+    for(i = 0; s[i]; i++)
+    {
+        if(s[i] == '(')
+        {
+            stack[++sidx] = '(';
+        }
+        else if(s[i] == ')')
+        {
+            j = sidx;
+            while(stack[j] != '(')
+                j--;
+            for(k = j+1; k < sidx; k++)
+            {
+                if(alpha[stack[k]-'A'][1] != alpha[stack[k+1]-'A'][0])
+                {
+                    //printf("%d %d %d %d\n", alpha[stack[k]-'A'][0], alpha[stack[k]-'A'][1], alpha[stack[k+1]-'A'][0], alpha[stack[k+1]-'A'][1]);
+                    puts("error");
+                    return;
+                }
+                sum += alpha[stack[k]-'A'][0]*alpha[stack[k]-'A'][1]*alpha[stack[k+1]-'A'][1];
+            }
+            alidx++;
+            alpha[alidx-'A'][0] = alpha[stack[j+1]-'A'][0];
+            alpha[alidx-'A'][1] = alpha[stack[sidx]-'A'][1];
+            //printf("%d %d %d\n", alpha[alidx][0], alpha[alidx][1], alidx);
+            stack[j] = alidx;
+            sidx = j;
+        }
+        else
+            stack[++sidx] = s[i];
+    }
+    printf("%d\n", sum);
+}
+int main()
+{
+    int x, y;
+    scanf("%d", &n);
+    for(i = 0; i < n; i++)
+    {
+        scanf("%s %d %d", s, &x, &y);
+        alpha[s[0]-'A'][0] = x;
+        alpha[s[0]-'A'][1] = y;
+    }
+    while(scanf("%s", s) == 1)
+    {
+        solve();
+    }
+    return 0;
+}
+
+
