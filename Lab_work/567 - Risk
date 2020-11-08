@@ -1,0 +1,115 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define		pb              push_back
+#define		PB              pop_back
+#define		nn              "\n"
+#define		all(p)          p.begin(),p.end()
+#define		zz(v)           v.size()
+#define		ss              ' '
+#define 	S(a)            scanf("%lld",&a)
+#define 	SS(a,b)         scanf("%lld %lld",&a,&b)
+#define 	SSS(a,b,c)      scanf("%lld %lld %lld",&a,&b,&c)
+#define		gcd(a,b)        __gcd(a,b)
+#define		lcm(a,b)        (a*b)/gcd(a,b)
+#define		pi              acos(-1.0)
+typedef		long long       ll;
+typedef		vector<ll>      vll;
+
+
+
+vll v[30];
+ll visited[30];
+ll level[30];
+
+void bfs(ll u)
+{
+    memset(visited,0,sizeof(visited));
+    memset(level,0,sizeof(level));
+    visited[u]=1;
+    level[u]=0;
+    queue<ll>q;
+    q.push(u);
+
+    while(!q.empty())
+    {
+        u=q.front();
+        visited[u]=1;
+        q.pop();
+
+        for(ll i=0; i<zz(v[u]); i++)
+        {
+            ll p=v[u][i];
+            if(!visited[p])
+            {
+
+                q.push(p);
+                visited[p]=1;
+                level[p]=level[u]+1;
+                //cout<<level[p];
+
+            }
+        }
+    }
+
+}
+
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    ll a,b,c,i,j,t,k,node,edge,in=1;
+
+    while(cin>>t)
+    {
+        for(ll k=0;k<25;k++)
+        {
+            v[k].clear();
+        }
+
+        for(ll i =0;i<t;i++)
+        {
+            cin>>a;
+            v[1].pb(a);
+            v[a].pb(1);
+        }
+        ll tsk=18;
+        ll mm=2;
+        while(tsk--)
+        {
+            cin>>a;
+              for(ll i =0;i<a;i++)
+              {
+                  cin>>b;
+                   v[b].pb(mm);
+                   v[mm].pb(b);
+              }
+              mm++;
+        }
+
+        ll tm;
+        cin>>tm;
+        vector<pair<ll,ll>>p;
+        vll p1;
+        while(tm--)
+        {
+            cin>>a>>b;
+             bfs(a);
+             p.pb(make_pair(a,level[b]));
+             p1.pb(b);
+        }
+
+        printf("Test Set #%lld\n",in++);
+
+        for(ll i=0;i<zz(p);i++)
+        {
+            printf("%2lld to %2lld:%2lld\n",p[i].first,p1[i],p[i].second);
+        }
+        
+        cout<<nn;
+    // bfs(1);
+//cout<<level[20];
+    }
+
+
+
+    return 0;
+}
