@@ -48,3 +48,11 @@ int main() {
 	LDS(n);
     return 0;
 }
+
+/*
+
+
+This can also be viewed as a Graph Theory problem, as the Longest Increasing Subsequence problem reduces to finding the longest path in a Directed Acyclic Graph. Therefore, this problem can be solved in {\displaystyle O(nlogn)}{\displaystyle O(nlogn)}. Using each elephant as a vertex, an edge can be drawn from a bigger, smarter (strictly) elephant to one that is less so.
+
+
+*/
